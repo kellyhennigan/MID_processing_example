@@ -1,6 +1,6 @@
-# Processing pipeline for fmrieat project 
+# MID processing pipeline 
 
-This repository has code for pre-processing and analyzing functional mri (fmri) data during the Monetary Incentive Delay (MID) task. We will analyze data from 2 subjects. Each subject performed the MID task over 2 scan runs with the following info: 
+This repository has code for pre-processing and analyzing functional mri (fmri) data during the Monetary Incentive Delay (MID) task up through fitting single-subject GLMs. We will analyze data from 2 subjects. Each subject performed the MID task over 2 scan runs with the following info: 
 
 - 6 conditions (0,1,5 gain/loss trials)
 - 15 trials per condition, so 90 trials total
@@ -40,9 +40,7 @@ to be able to execute them. This only needs to be run once.
 - [QA check head motion](#QA-motion)
 - [Get stimulus onset times and make regressors](#get-stimulus-onset-times-and-make-regressors)
 - [Subject-level GLMs](#subject-level-glms)
-- [Group-level whole brain analyses](#group-level-whole-brain-analyses)
 - [Generate VOI timecourses](#generate-voi-timecourses)
-- [Behavioral analyses](#behavioral-analyses)
 
 
 
@@ -101,7 +99,7 @@ And here's an example of bad coregistration (where something went terribly wrong
   <img width="161" height="151" src="https://github.com/kellyhennigan/fmrieat/blob/master/coreg_examples/bad_coreg_y.jpg">
 </p>
 
-**To correct bad coregistration: **
+**To correct bad coregistration:**
 
 - if the problem appears to be bad alignment between a subject's anatomical and functional data (to check this, load files "t1_ns.nii.gz" and "vol1_mid_ns_al.nii.gz" in afni viewer), you may need to first manually "nudge" the subject's raw t1-weighted volume to be in better alignment with their functional data. To do that: 
 * open afni in subject's raw directory, 
@@ -188,19 +186,8 @@ to specify GLM and fit that model to data using afni's 3dDeconvolve. There's exc
 saves out the following files to directory **data/results_mid**:
 * subjid_glm_B+tlrc 	# file containing only beta coefficients for each regressor in GLM
 * subjid_glm+tlrc 		# file containing a bunch of GLM stats
+* subjid_glm.xmat.1D 	# file containing the 
 To check out glm results, open these files in afni as an overlay (with, e.g., TT_N27.nii as underlay). You can also get info about these files using afni's 3dinfo command, e.g., from the terminal command line, `3dinfo -verb subjid_glm_B+tlrc`.
-
-
-
-### Group-level whole brain analyses
-From terminal command line, run: 
-```
-python ttest_mid.py
-```
-to use AFNI's command 3dttest++ to perform t-ttests on subjects' brain maps.
-
-#### output 
-Saves out resulting Z-maps to directory **data/results_mid**. Check out results in afni viewer. 
 
 
 
@@ -216,5 +203,6 @@ plotRoiTimeCourses_script
 to save out and plot VOI timecourses for events of interest.
 
 #### output 
-Saves out VOI timecourses to directory **data/timecourses_mid** and saves out figures to **figures/timecourses_mid/**.
+Saves out VOI timecourses to directory **data/timecourses_cue/** and saves out figures to **figures/timecourses_mid/**.
+
 

@@ -132,11 +132,11 @@ do
 	cat  mid1_enorm.1D mid2_enorm.1D >> mid_enorm.1D
 
 
-	# # remove intermediate files 
-	# # NOTE: ONLY DO THIS ONCE YOU'RE CONFIDENT THAT THE PIPELINE IS WORKING! 
-	# # (because you may want to view intermediate files to troubleshoot the pipeline)
-	# rm *mid2*
-	# rm *mid1*
+	# remove intermediate files 
+	# NOTE: ONLY DO THIS ONCE YOU'RE CONFIDENT THAT THE PIPELINE IS WORKING! 
+	# (because you may want to view intermediate files to troubleshoot the pipeline)
+	rm *mid2*
+	rm *mid1*
 
 
 ######################## transform to tlrc space
