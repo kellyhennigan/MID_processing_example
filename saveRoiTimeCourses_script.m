@@ -28,8 +28,7 @@ close all
 
 % assume this is being run from the "script" directory
 scriptsDir=pwd;
-cd ..
-mainDir = pwd; 
+cd ..; mainDir = pwd; cd(scriptsDir);
 dataDir = [mainDir '/data']; 
 
 
