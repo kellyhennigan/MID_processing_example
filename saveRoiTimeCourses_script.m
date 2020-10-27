@@ -42,7 +42,7 @@ subjects = {'subj002','subj003'};
 %%%%%%%%%%%%%%%%%%%%%%%%%% FMRI data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % filepath to pre-processed functional data where %s is subject 
-funcFilePath = fullfile(dataDir, '%s','pp_mid_tlrc.nii.gz');
+funcFilePath = fullfile(dataDir, '%s','func_proc','pp_mid_tlrc.nii.gz');
 
 % OPTIONAL: include path to file that says which volumes to censor
 % (exclude) due to head movement, spiky data, etc. If included, this file
@@ -50,7 +50,7 @@ funcFilePath = fullfile(dataDir, '%s','pp_mid_tlrc.nii.gz');
 % 0 means censor that volume, otherwise, 1.
 
 censorBadTRs=1; % 0 to NOT do this, 1 to do this
-censorFilePath = fullfile(dataDir,'%s','mid_censor.1D'); % this is only used if censorBadTRs=1
+censorFilePath = fullfile(dataDir,'%s','func_proc','mid_censor.1D'); % this is only used if censorBadTRs=1
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% event files %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -116,7 +116,7 @@ TC = cell(numel(roiNames),numel(stimFiles)); % cell array that will contain
 
 
 % get roi masks
-roiFiles = cellfun(@(x) [x '.nii.gz'], roiNames,'UniformOutput',0);
+roiFiles = cellfun(@(x) [x '.nii'], roiNames,'UniformOutput',0);
 rois = cellfun(@(x) niftiRead(fullfile(roiDir,x)), roiFiles,'uniformoutput',0);
 
 

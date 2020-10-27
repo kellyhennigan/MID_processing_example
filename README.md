@@ -17,8 +17,10 @@ This repository has code for pre-processing and analyzing functional mri (fmri) 
 ### Software requirements 
 
 * [Python 2.7](https://www.python.org/)
-* [Matlab](https://www.mathworks.com/products/matlab.html)
 * [AFNI](https://afni.nimh.nih.gov/) 
+* [Matlab](https://www.mathworks.com/products/matlab.html) (used only for saving & plotting ROI timecourses)
+* [matlab package, VISTASOFT](https://github.com/vistalab/vistasoft) (used only for its niftiRead() function to load nifti files into matlab for saving timecourses)
+
 
 
 ### Permissions
@@ -200,7 +202,14 @@ and then:
 ```
 plotRoiTimeCourses_script
 ```
-to save out and plot VOI timecourses for events of interest.
+to save out and plot VOI timecourses for events of interest. 
+
+You can also plot an ROI timecourse for a given condition by subject with this script: 
+```
+plotRoiTimeCourses_subject_script
+```
+This is mainly for troubleshooting purposes; it helps to see if the timecourses look funky for a particular subject. 
+
 
 #### output 
 Saves out VOI timecourses to directory **data/timecourses_cue/** and saves out figures to **figures/timecourses_mid/**.

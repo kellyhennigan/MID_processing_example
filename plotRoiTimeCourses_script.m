@@ -15,7 +15,7 @@ close all
 mainDir = '/Users/kelly/MID_pilot';
 scriptsDir = [mainDir '/scripts']; % this should be the directory where this script is located
 dataDir = [mainDir '/data']; 
-
+figDir = [mainDir '/figures']; 
 
 % add scripts to matlab's search path
 path(path,genpath(scriptsDir)); % add scripts dir to matlab search path
@@ -53,7 +53,7 @@ xt = t; %  xticks on the plotted x axis
 
 plotStims = {'gain0 gain1 gain5';
     'gain5-gain0';
-    'gainwin gainmiss',
+    'gainwin gainmiss';
     'loss0 loss1 loss5';
     'loss5-loss0';
     'losswin lossmiss'};
