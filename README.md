@@ -5,7 +5,7 @@ This repository has code for pre-processing and analyzing functional mri (fmri) 
 - 6 conditions (0,1,5 gain/loss trials)
 - 15 trials per condition, so 90 trials total
 - trial timing: 
-	* 0-2 s: cue presentation 
+	* 0-2 s: mid presentation 
 	* 4.25-5 s: target "window" (i.e., target will appear sometime within this time window)
 	* 6-8 s: outcome presentation
 	* intertrial interval (ITI) of either 2, 4 or 6 s, averaging 4 s across all trials
@@ -18,7 +18,7 @@ This repository has code for pre-processing and analyzing functional mri (fmri) 
 
 * [Python 2.7](https://www.python.org/)
 * [Matlab](https://www.mathworks.com/products/matlab.html)
-* [AFNI](https://afni.nimh.nih.gov/) (fmri pipeline only)
+* [AFNI](https://afni.nimh.nih.gov/) 
 
 
 ### Permissions
@@ -164,16 +164,16 @@ You might also want to plot some ROI timeseries to make sure they look okay (e.g
 
 
 ### Get stimulus onset times and make regressors
-In matlab, run: 
+From terminal, run: 
 ```
-createRegs_script
+./regs_mid.csh
 ```
 this script loads behavioral data to get stimulus onset times and saves out regressors of interest. Saved out files each contain a single vector of length equal to the number of TRs in the task with mostly 0 entries, and than 1 to indicate when an event of interest occurs. These vectors are then convolved with an hrf using AFNI's waver command to model the hemodynamic response. 
 
 Note that the output files from this script are used for estimating single-subject GLMs as well as for plotting VOI timecourses. 
 
 #### output 
-this should create directory **fmrieat/derivatives/subjid/regs** which should contain all the regressor and stimulus timing files. To check out regressor time series, from a terminal command line, cd to output "regs" directory, then type, e.g., `1dplot food_cue_cuec.1D`. 
+this should create directory **data/subjid/regs** which should contain all the regressor and stimulus timing files. To check out regressor time series, from a terminal command line, cd to output "regs" directory, then type, e.g., `1dplot food_mid_midc.1D`. 
 
 
 
@@ -185,7 +185,7 @@ python glm_mid.py
 to specify GLM and fit that model to data using afni's 3dDeconvolve. There's excellent documentation on this command [here](https://afni.nimh.nih.gov/pub/dist/doc/manual/Deconvolvem.pdf). 
 
 #### output 
-saves out the following files to directory **fmrieat/derivatives/results_cue**:
+saves out the following files to directory **data/results_mid**:
 * subjid_glm_B+tlrc 	# file containing only beta coefficients for each regressor in GLM
 * subjid_glm+tlrc 		# file containing a bunch of GLM stats
 To check out glm results, open these files in afni as an overlay (with, e.g., TT_N27.nii as underlay). You can also get info about these files using afni's 3dinfo command, e.g., from the terminal command line, `3dinfo -verb subjid_glm_B+tlrc`.
@@ -195,12 +195,12 @@ To check out glm results, open these files in afni as an overlay (with, e.g., TT
 ### Group-level whole brain analyses
 From terminal command line, run: 
 ```
-python ttest_cue.py
+python ttest_mid.py
 ```
 to use AFNI's command 3dttest++ to perform t-ttests on subjects' brain maps.
 
 #### output 
-Saves out resulting Z-maps to directory **fmrieat/derivatives/results_cue**. Check out results in afni viewer. 
+Saves out resulting Z-maps to directory **data/results_mid**. Check out results in afni viewer. 
 
 
 
@@ -216,171 +216,5 @@ plotRoiTimeCourses_script
 to save out and plot VOI timecourses for events of interest.
 
 #### output 
-Saves out VOI timecourses to directory **fmrieat/derivatives/timecourses_cue** and saves out figures to **fmrieat/figures/timecourses_cue/**.
-
-
-
-### Behavioral analyses
-In matlab, run: 
-```
-analyzeBehavior_script & analyzeBehavior_singlesubject_script
-```
-to check out behavioral data. 
-
-
-
-### TO DO: 
-- qualtrics questionnaire analyses
-- pipeline data collected on paper (weight, height, etc.)
-- get follow-up data!
-
-
-
-## dMRI pipeline
-
-This pipeline is specifically designed for identifying the medial forebrain bundle. 
-
-### Acpc-align t1 data
-In matlab, run:
-```
-mrAnatAverageAcpcNifti
-```
-Use GUI to manually acpc-align t1 data 
-
-#### output
-Save out acpc-aligned nifti to **fmrieat/derivatives/anat_proc/t1_acpc.nii.gz**. 
-
-
-### Run freesurfer recon
-From terminal command line, cd to dir with subject's acpc-aligned t1 and run: 
-```
-recon-all -i t1_acpc.nii.gz -subjid subjid -all
-```
-This calls freesurfer's recon command to segment brain tissue
-
-#### output
-Saves out a bunch of files to directory, **/usr/local/freesurfer/subjects/subjid**.
-
-
-
-### Convert freesurfer files to nifti and save out ROI masks
-In matlab, run:
-```
-convertFsSegFiles_script.m
-createRoiMasks_script.m
-```
-To convert freesurfer segmentation files to be in nifti format & save out desired ROI masks based on FS segmentation labels
-
-#### output
-Saves out files to directory, **fmrieat/derivatives/subjid/anat_proc**
-
-
-
-### Convert midbrain ROI from standard > native space
-From terminal command line, run:
-```
-t12mni_ANTS_script.py
-```
-and then in matlab, run:
-```
-xformROIs_script.m
-```
-To estimate the tranform (using ANTs) between subject's acpc-aligned native space and standard space and to apply the inverse transform to take a midbrain ROI in standard space > subject native space. 
-
-We're currently trying out a midbrain ROI placed on the CIT168 atlas (Pauli et al., 2018) using these labels combined (all dopaminergic regions): VTA, SNc, and PBP. 
-
-#### output
-Saves out acpc-aligned<->standard space transforms to directory, **fmrieat/derivatives/subjid/anat_proc**, and saves out a midbrain ROI ("PauliAtlasDA.nii.gz") in directory: **fmrieat/derivatives/subjid/ROIs**
-
-
-
-### dilate ROIs (if desired)
-Following procedures in MacNiven et al (2020), at least for tracking between the midbrain and NAcc, dilate these ROIs by 2 voxels using an mrtrix command (e.g., "maskfilter -npass 2 naccL.nii.gz dilate naccL_dil2.nii.gz")
-
-#### output
-dilated ROI nifti files to directory, **fmrieat/derivatives/subjid/ROIs**
-
-
-
-### Pre-process diffusion data
-In Matlab, run:
-```
-dtiPreProcess_script
-```
-To do vistasoft standard pre-processing steps on diffusion data.
-
-#### output
-Saves out files to directory, **fmrieat/derivatives/subjid/dti96trilin**
-
-
-
-### mrtrix pre-processing steps 
-From terminal command line, run:
-```
-python mrtrix_proc.py
-```
-This script: 
-* copies b_file and brainmask to mrtrix output dir
-* make mrtrix tensor file and fa map (for comparison with mrvista maps and for QA)
-* estimate response function using lmax of 8
-* estimate fiber orientation distribution (FOD) (for tractography)
-
-#### output
-Saves out files to directory, **fmrieat/derivatives/subjid/dti96trilin/mrtrix**
-
-
-
-### Track fibers
-From terminal command line, run:
-```
-python mrtrix_fibertrack_mfb.py, 		 	 # for inferior NAcc tract
-python mrtrix_fibertrack_mfb_aboveAC.py, or  # for superior NAcc tract
-python mrtrix_fibertrack.py			 	     # for all other tracts
-```
-tracks fiber pathways between 2 ROIs with desired parameters. The "mfb" script includes an exclusionary ROI to not include any streamlines that go above the anterior commissure; the "...mfb_aboveAC" script has an exclusionary ROI to not include any streamlines that run below the anterior commissure.
-
-##### output
-Saves out files to directory, **fmrieat/derivatives/fibers/dti96trilin/mrtrix**
-
-
-
-### Clean fiber bundles
-In matlab:
-```
-cleanFibersMFB_script, 			# for inferior NAcc tract
-cleanFibersAboveAC_script, or  	# for superior NAcc tract
-cleanFibers_script 				# for all other tracts
-
-```
-uses AFQ software to iteratively remove errant fibers 
-
-##### output
-Saves out fiber group files to directory, **fmrieat/derivatives/subjid/fibers**
-
-
-
-### Save out measurements from fiber bundles cores
-In matlab:
-```
-dtiSaveFGMeasures_script & dtiSaveFGMeasures_csv_script
-```
-to save out summary tract measures 
-
-##### output
-Saves out .mat files with summary measures to directory, **fmrieat/derivatives/fgMeasures/mrtrix_fa/**
-
-
-
-### Regression and correlation analyses to test relationships between tract coherence, personality, behavior, and/or fMRI measures
-
-
-
-
-
-
-
-
-
-
-
+Saves out VOI timecourses to directory **data/timecourses_mid** and saves out figures to **figures/timecourses_mid/**.
 
