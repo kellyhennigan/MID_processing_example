@@ -202,7 +202,12 @@ and then:
 ```
 plotRoiTimeCourses_script
 ```
-to save out and plot VOI timecourses for events of interest. Here's an example timecourse plot showing gain 0, gain 1, and gain 5 trials in the nucleus accumbens (NAcc) in a sample of 42 controls:
+to save out and plot VOI timecourses for events of interest. 
+
+#### output 
+Saves out VOI timecourses to directory **data/timecourses_cue/** and saves out figures to **figures/timecourses_mid/**.
+
+Here's an example timecourse plot showing gain 0, gain 1, and gain 5 trials in the nucleus accumbens (NAcc) in a sample of 42 controls:
 
 <p align="center">
   <img width="665" height="500" src="https://github.com/kellyhennigan/MID_processing_example/blob/master/nacc_desai_gain_trials_controls.png">
@@ -215,7 +220,5 @@ plotRoiTimeCourses_subject_script
 This is mainly for troubleshooting purposes; it helps to see if the timecourses look funky for a particular subject. 
 
 
-#### output 
-Saves out VOI timecourses to directory **data/timecourses_cue/** and saves out figures to **figures/timecourses_mid/**.
 
 
