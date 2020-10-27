@@ -104,7 +104,7 @@ TR = 2; % TR (in units of seconds)
 t = 0:TR:TR*(nTRs-1); % time points (in seconds) to plot
 
 
-plotSingleTrials=input('plot single trials? Note this GREATLY increases processing time! 1=yes 0=no ');
+plotSingleTrials=input('plot single trials?\n Note this GREATLY increases processing time!\n Use this only for troubleshooting potentially bad/spiky timepoints.\n1=yes 0=no ');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
