@@ -26,9 +26,10 @@ close all
 
 %%%%%%%%%%%%%%%%%%%  define experiment directories %%%%%%%%%%%%%%%%%%%%%%%%
 
-% EDIT MAIN DIR PATH HERE 
-mainDir = '/Users/kelly/MID_pilot';
-scriptsDir = [mainDir '/scripts']; % this should be the directory where this script is located
+% assume this is being run from the "script" directory
+scriptsDir=pwd;
+cd ..
+mainDir = pwd; 
 dataDir = [mainDir '/data']; 
 
 

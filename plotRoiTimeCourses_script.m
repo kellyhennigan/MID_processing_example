@@ -11,14 +11,17 @@ close all
 
 %%%%%%%%%%%%%%%%%%%%%  define relevant variables %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% EDIT MAIN DIR PATH HERE 
-mainDir = '/Users/kelly/MID_pilot';
-scriptsDir = [mainDir '/scripts']; % this should be the directory where this script is located
+% assume this is being run from the "script" directory
+scriptsDir=pwd;
+cd ..
+mainDir = pwd; 
 dataDir = [mainDir '/data']; 
 figDir = [mainDir '/figures']; 
 
+
 % add scripts to matlab's search path
 path(path,genpath(scriptsDir)); % add scripts dir to matlab search path
+
 
 
 subjects = {'subj002','subj003'};
