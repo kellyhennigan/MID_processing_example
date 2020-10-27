@@ -205,7 +205,7 @@ plotRoiTimeCourses_script
 to save out and plot VOI timecourses for events of interest. Here's an example timecourse plot showing gain 0, gain 1, and gain 5 trials in the nucleus accumbens (NAcc) in a sample of 42 controls:
 
 <p align="center">
-  <img width="161" height="151" src="https://github.com/kellyhennigan/MID_processing_example/blob/master/nacc_desai_gain_trials_controls.png">
+  <img width="665" height="500" src="https://github.com/kellyhennigan/MID_processing_example/blob/master/nacc_desai_gain_trials_controls.png">
 </p>
 
 You can also plot an ROI timecourse for a given condition by subject with this script: 
