@@ -1,6 +1,6 @@
 # MID processing pipeline 
 
-This repository has code for pre-processing and analyzing functional mri (fmri) data during the Monetary Incentive Delay (MID) task up through fitting single-subject GLMs. We will analyze data from 2 subjects. Each subject performed the MID task over 2 scan runs with the following info: 
+This repository has code for pre-processing and analyzing functional mri (fmri) data during the Monetary Incentive Delay (MID) task up through fitting single-subject GLMs & plotting VOI timecourses. We will analyze data from 2 subjects. Each subject performed the MID task over 2 scan runs with the following info: 
 
 - 6 conditions (0,1,5 gain/loss trials)
 - 15 trials per condition, so 90 trials total
