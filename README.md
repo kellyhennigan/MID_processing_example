@@ -67,7 +67,7 @@ Open up that file and confirm that there are 549 rows, including the header file
 
 
 ### Estimate transforms from subject's native to standard space
-from a terminal command line, run: 
+from a terminal command line, cd to your scripts directory and run: 
 ```
 ./preprocess_mid1.sh
 ```
@@ -118,7 +118,7 @@ And here's an example of bad coregistration (where something went terribly wrong
 
 
 ### Pre-process fmri data
-from a terminal command line, run:
+from a terminal command line, cd to your scripts directory and run:
 ```
 ./preprocess_mid2.sh
 ```
@@ -164,7 +164,7 @@ You might also want to plot some ROI timeseries to make sure they look okay (e.g
 
 
 ### Get stimulus onset times and make regressors
-From terminal, run: 
+From terminal, cd to your scripts directory and run: 
 ```
 ./regs_mid.csh
 ```
@@ -178,7 +178,7 @@ this should create directory **data/subjid/regs** which should contain all the r
 
 
 ### Subject-level GLMs
-From terminal command line, run: 
+From terminal command line, cd to your scripts directory and run: 
 ```
 python glm_mid.py
 ```
@@ -200,7 +200,7 @@ Once ou have those files, cd to the **results_mid** directory, and open the afni
 
 
 ### Generate VOI timecourses
-In matlab, run: 
+In matlab, cd to your scripts directory and run: 
 ```
 saveRoiTimeCourses_script
 ```
