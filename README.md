@@ -211,7 +211,7 @@ plotRoiTimeCourses_script
 to save out and plot VOI timecourses for events of interest. 
 
 #### output 
-Saves out VOI timecourses to directory **data/timecourses_cue/** and saves out figures to **figures/timecourses_mid/**.
+Saves out VOI timecourses (as csv files) to directory **data/timecourses_cue/** and saves out figures to **figures/timecourses_mid/**.
 
 Here's an example timecourse plot showing gain 0, gain 1, and gain 5 trials in the nucleus accumbens (NAcc) in a sample of 42 controls:
 
