@@ -187,9 +187,15 @@ to specify GLM and fit that model to data using afni's 3dDeconvolve. There's exc
 #### output 
 saves out the following files to directory **data/results_mid**:
 * subjid_glm_B+tlrc 	# file containing only beta coefficients for each regressor in GLM
-* subjid_glm+tlrc 		# file containing a bunch of GLM stats
+* subjid_glm+tlrc 		# file containing a bunch of stats (beta coefficients and corresponding t statistics, Rsquared, etc)
 * subjid_glm.xmat.1D 	# file containing the 
 To check out glm results, open these files in afni as an overlay (with, e.g., TT_N27.nii as underlay). You can also get info about these files using afni's 3dinfo command, e.g., from the terminal command line, `3dinfo -verb subjid_glm_B+tlrc`.
+
+Once ou have those files, cd to the **results_mid** directory, and open the afni viewer (type "afni") in the terminal; load the anatomical template, TT_N27.nii as the underlay (you may need to add a copy of that nifti file into the results_mid directory), and load a "subjid_glm+tlrc" file as the overlay. You can change which stat map you are viewing as the overlay by clicking on the "Olay" dropdown menu within Afni's viewer window. Poke around. Here's what subj002's gain vs no-gain anticipation t-statistic map looks like: 
+
+<p align="center">
+  <img width="332" height="302" src="https://github.com/kellyhennigan/MID_processing_example/blob/master/subj002_gvn_y12.jpg">
+</p>
 
 
 
