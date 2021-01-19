@@ -173,10 +173,15 @@ this script loads behavioral data to get stimulus onset times and saves out regr
 Note that the output files from this script are used for estimating single-subject GLMs as well as for plotting VOI timecourses. 
 
 #### output 
-this should create directory **data/subjid/regs** which should contain all the regressor and stimulus timing files. The nomenclature for file naming is generally: [condition or contrast]_[trial period]_[task].1D, with a "c" before the file suffix of ".1D" indicating that the regressor time series was convolved with a hemodynamic response function (hrf). So, for example the file, "gvn_ant_midc.1D" is the convolved regressor for gain versus no gain trials ("gvn"), modeling the anticipation period ("ant"), for the "mid" task. 
+this should create directory **data/subjid/regs** which should contain all the regressor and stimulus timing files. The nomenclature for file naming is generally: [condition or contrast] _ [trial period] _ [task].1D. 
 
-To see what the regressors look like, you can plot them using AFNI's 1dplot command, e.g., "1dplot gvn_ant_midc.1D". 
+For example, the file, "gvn_ant_mid.1D" means that the regressor is for the contrast of gain versus no gain trials ("gvn"), modeling the anticipation period ("ant"), for the mid task. Regressors that have been convolved with a hemdynamic response function (hrf) have a "c" before the ".1D" file suffix, e.g., gvn_ant_midc.1D. 
 
+To see what the regressors look like, you can plot them using AFNI's 1dplot command, e.g.,
+
+```
+1dplot gvn_ant_midc.1D
+```
 
 
 ### Subject-level GLMs
